@@ -1,0 +1,215 @@
+<mxfile host="65bd71144e">
+    <diagram id="NqEne8MOS5wWxZyN_KWK" name="Page-2">
+        <mxGraphModel dx="751" dy="1020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="NtaxBall_cIPfuidpTQN-36" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;shadow=0;gradientColor=none;fillStyle=dashed;" vertex="1" parent="1">
+                    <mxGeometry x="10" y="30" width="120" height="690" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-1" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;PRESENTATION TIER&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="40" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-2" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;APPLICATION LOGIC TIER&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="40" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-5" value="Web interface" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="25" y="150" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-6" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;SDS COMPARISON BACKEND&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#dae8fc;strokeColor=default;gradientColor=none;fillStyle=solid;strokeWidth=0;" vertex="1" parent="1">
+                    <mxGeometry x="140" y="110" width="430" height="440" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-20" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-7" target="NtaxBall_cIPfuidpTQN-5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-7" value="User(SDS reviewer)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="25" y="90" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-9" value="PDFExtractor" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="295.63" y="220" width="145" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-25" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#3333FF;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-11" target="NtaxBall_cIPfuidpTQN-9">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-54" value="&lt;font style=&quot;color: rgb(255, 255, 255); background-color: rgb(51, 51, 255);&quot;&gt;Extract text&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-25">
+                    <mxGeometry x="-0.2222" y="-3" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-11" value="SDSComparisonService" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="295.63" y="150" width="145" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-12" value="SectionDetector" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="297.5" y="270" width="145" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-13" value="DiffEngine" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="297.5" y="320" width="145" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-32" value="" style="edgeStyle=none;html=1;strokeColor=#FF66FF;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-15" target="NtaxBall_cIPfuidpTQN-16">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-15" value="HazardAnalysisService (Section 2)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="295.63" y="380" width="145" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-33" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF66FF;entryPerimeter=0;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-16" target="NtaxBall_cIPfuidpTQN-19">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="200" y="470"/>
+                            <mxPoint x="200" y="600"/>
+                            <mxPoint x="200" y="643"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-16" value="ChemicalReferenceRepository" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="288.13" y="450" width="163.75" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-17" value="PDF library" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="321.51" y="562" width="97" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-19" value="Chemical reference database" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="321.51" y="620" width="97" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-23" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#99004D;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-5" target="NtaxBall_cIPfuidpTQN-11">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="300" y="340" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-53" value="&lt;font style=&quot;background-color: rgb(153, 0, 77); color: rgb(255, 255, 255);&quot;&gt;Compare&amp;nbsp;request&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#99004D;fontColor=#FFFFFF;" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-23">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-27" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#3333FF;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-9" target="NtaxBall_cIPfuidpTQN-17">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="410" y="610" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="540" y="240"/>
+                            <mxPoint x="540" y="585"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-55" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;PyMuPDF/PDF Miner&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rotation=90;labelBackgroundColor=#3333FF;" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-27">
+                    <mxGeometry x="-0.0673" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-28" value="" style="endArrow=classic;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;strokeColor=#00CC00;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-11" target="NtaxBall_cIPfuidpTQN-12">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="296" y="290" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="240" y="180"/>
+                            <mxPoint x="240" y="250"/>
+                            <mxPoint x="240" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-57" value="Detect 1-16&amp;nbsp;&lt;div&gt;sections&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rotation=0;labelBackgroundColor=#00CC00;" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-28">
+                    <mxGeometry x="-0.0199" y="-2" relative="1" as="geometry">
+                        <mxPoint x="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-29" value="" style="endArrow=classic;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;strokeColor=#00CC00;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-12" target="NtaxBall_cIPfuidpTQN-13">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="298" y="340" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="240" y="290"/>
+                            <mxPoint x="240" y="350"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-61" value="Aligned section&lt;div&gt;&amp;nbsp;text&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#00CC00;" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-29">
+                    <mxGeometry x="0.0027" y="-2" relative="1" as="geometry">
+                        <mxPoint x="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-30" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontColor=#000000;labelBackgroundColor=#00CC00;strokeColor=#00CC00;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-13" target="NtaxBall_cIPfuidpTQN-11">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="300" y="340" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="510" y="340"/>
+                            <mxPoint x="510" y="230"/>
+                            <mxPoint x="510" y="160"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-31" value="" style="endArrow=classic;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF66FF;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-11" target="NtaxBall_cIPfuidpTQN-15">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="300" y="340" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="200" y="190"/>
+                            <mxPoint x="200" y="300"/>
+                            <mxPoint x="200" y="400"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-62" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 102, 255), rgb(205, 74, 205));&quot;&gt;Section 2&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: light-dark(rgb(255, 102, 255), rgb(205, 74, 205));&quot;&gt;changes&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#FF66FF;" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-31">
+                    <mxGeometry x="0.4594" y="-2" relative="1" as="geometry">
+                        <mxPoint y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-34" value="" style="endArrow=classic;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;strokeColor=#00FFFF;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-11" target="NtaxBall_cIPfuidpTQN-5">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250" y="390" as="sourcePoint"/>
+                        <mxPoint x="300" y="340" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="296" y="140"/>
+                            <mxPoint x="210" y="140"/>
+                            <mxPoint x="140" y="140"/>
+                            <mxPoint x="150" y="160"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-63" value="&lt;span style=&quot;&quot;&gt;section changes &amp;amp;&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;&quot;&gt;hazard details&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#00FFFF;" vertex="1" connectable="0" parent="NtaxBall_cIPfuidpTQN-34">
+                    <mxGeometry x="0.0402" y="-1" relative="1" as="geometry">
+                        <mxPoint x="-10" y="11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-39" value="" style="endArrow=none;dashed=1;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-36">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="410" as="sourcePoint"/>
+                        <mxPoint x="280" y="30" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-40" value="" style="endArrow=none;dashed=1;html=1;entryX=0.322;entryY=-0.009;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="NtaxBall_cIPfuidpTQN-6">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="277" y="30" as="sourcePoint"/>
+                        <mxPoint x="277" y="120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-42" value="" style="endArrow=none;dashed=1;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="280" y="30" as="sourcePoint"/>
+                        <mxPoint x="580" y="30" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-43" value="" style="endArrow=none;dashed=1;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="580" y="720" as="sourcePoint"/>
+                        <mxPoint x="580" y="30" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-44" value="" style="endArrow=none;dashed=1;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-36">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="410" as="sourcePoint"/>
+                        <mxPoint x="580" y="720" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-48" value="" style="endArrow=none;dashed=1;html=1;exitX=0.322;exitY=1.006;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="NtaxBall_cIPfuidpTQN-6">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="560" as="sourcePoint"/>
+                        <mxPoint x="280" y="720" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="NtaxBall_cIPfuidpTQN-52" value="&lt;span style=&quot;color: rgb(63, 63, 63); font-size: 14px; text-wrap-mode: wrap;&quot;&gt;DATA &amp;amp; EXTERNAL&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); font-size: 14px; text-wrap-mode: wrap;&quot;&gt;SERVICES TIER&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="40" width="150" height="50" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
