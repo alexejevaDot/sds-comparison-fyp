@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SDS Comparison</title>
+</head>
+<body>
+    <h1>SDS Comparison – Upload PDFs</h1>
+    <form action="/compare" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="old_sds">Old SDS PDF:</label>
+            <input type="file" name="old_sds" id="old_sds"
+                   accept="application/pdf" required>
+        </div>
+        <div>
+            <label for="new_sds">New SDS PDF:</label>
+            <input type="file" name="new_sds" id="new_sds"
+                   accept="application/pdf" required>
+        </div>
+        <button type="submit">Compare</button>
+    </form>
+</body>
+</html>
