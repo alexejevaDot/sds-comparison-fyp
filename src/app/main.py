@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import os
 import json
 from pathlib import Path
-from . import sds_parser
+from . import sds_parser, sds_compare
 
 app = Flask(__name__)
 
@@ -24,8 +24,9 @@ def index():
 def compare():
     """
     Handle uploaded SDS PDF files, extract their text, detect sections,
-    save debug data, and display simple results.
+    compare sections, save debug data, and display simple results.
     """
+    
     old_file = request.files.get('old_sds')
     new_file = request.files.get('new_sds')
 
@@ -44,6 +45,9 @@ def compare():
     old_sections = sds_parser.split_into_sections(old_text)
     new_sections = sds_parser.split_into_sections(new_text)
 
+    comparison_results = sds_compare.compare_sections(old_sections, new_sections)
+    summary = sds_compare.summarize_changes(comparison_results)
+
     debug_folder = Path("debug_outputs")
     debug_folder.mkdir(exist_ok=True)
 
@@ -54,19 +58,38 @@ def compare():
         "new_sections_found": sorted(new_sections.keys()),
         "old_section_lengths": {str(k): len(v) for k, v in old_sections.items()},
         "new_section_lengths": {str(k): len(v) for k, v in new_sections.items()},
-        "old_section_preview": {str(k): v[:200] for k, v in old_sections.items()},
-        "new_section_preview": {str(k): v[:200] for k, v in new_sections.items()},
+        "comparison_results": {str(k): v for k, v in comparison_results.items()},
+        "summary": summary,
     }
 
     with open(debug_folder / "section_detection_debug.json", "w", encoding="utf-8") as f:
         json.dump(debug_data, f, indent=4, ensure_ascii=False)
 
-    return (
-        f"Old SDS length: {len(old_text)} characters<br>"
-        f"New SDS length: {len(new_text)} characters<br><br>"
-        f"Old SDS sections found: {sorted(old_sections.keys())}<br>"
-        f"New SDS sections found: {sorted(new_sections.keys())}<br><br>"
-        f"Debug file saved to: debug_outputs/section_detection_debug.json"
+        section_rows = []
+
+    for section_num, result in comparison_results.items():
+        section_rows.append({
+            "section_num": section_num,
+            "old_present": result["old_present"],
+            "new_present": result["new_present"],
+            "old_length": result["old_length"],
+            "new_length": result["new_length"],
+            "changed": result["changed"],
+            "old_preview": result["old_preview"],
+            "new_preview": result["new_preview"],
+            "change_summary": result["change_summary"],
+    })
+    section_2 = comparison_results.get(2)
+
+    return render_template(
+        "results.html",
+        old_text_length=len(old_text),
+        new_text_length=len(new_text),
+        old_sections_found=sorted(old_sections.keys()),
+        new_sections_found=sorted(new_sections.keys()),
+        summary=summary,
+        section_rows=section_rows,
+        section_2=section_2,
     )
 
 

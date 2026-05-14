@@ -71,6 +71,78 @@ def split_into_sections(text: str) -> dict:
     return sections
         
 
+"""
+Helper functions for comparing two sets of SDS sections and identifying changes.
+"""
+
+def compare_sections(old_sections: dict, new_sections: dict) -> dict:
+    """
+    Compare two dictionaries of SDS sections and return comparison results.
+    
+    Args:
+        old_sections: Dictionary mapping section numbers to text (from old SDS)
+        new_sections: Dictionary mapping section numbers to text (from new SDS)
+    
+    Returns:
+        Dictionary with section-level comparison results, keyed by section number.
+        Each entry contains: old_present, new_present, old_length, new_length, changed.
+    """
+    all_section_numbers = set(old_sections.keys()) | set(new_sections.keys())
+    
+    results = {}
+    
+    for section_num in sorted(all_section_numbers):
+        old_text = old_sections.get(section_num, "")
+        new_text = new_sections.get(section_num, "")
+        
+        old_present = section_num in old_sections
+        new_present = section_num in new_sections
+        
+        # Normalize whitespace for comparison
+        old_normalized = " ".join(old_text.split())
+        new_normalized = " ".join(new_text.split())
+        
+        changed = old_normalized != new_normalized
+        
+        results[section_num] = {
+            "old_present": old_present,
+            "new_present": new_present,
+            "old_length": len(old_text),
+            "new_length": len(new_text),
+            "changed": changed,
+        }
+    
+    return results
 
 
-
+def summarize_changes(comparison_results: dict) -> dict:
+    """
+    Generate a summary of changes across all sections.
+    
+    Args:
+        comparison_results: Output from compare_sections()
+    
+    Returns:
+        Dictionary with summary statistics: total_sections, sections_changed, etc.
+    """
+    total_sections = len(comparison_results)
+    sections_changed = sum(1 for r in comparison_results.values() if r["changed"])
+    sections_unchanged = total_sections - sections_changed
+    
+    added_sections = [
+        num for num, r in comparison_results.items() 
+        if not r["old_present"] and r["new_present"]
+    ]
+    
+    removed_sections = [
+        num for num, r in comparison_results.items() 
+        if r["old_present"] and not r["new_present"]
+    ]
+    
+    return {
+        "total_sections": total_sections,
+        "sections_changed": sections_changed,
+        "sections_unchanged": sections_unchanged,
+        "added_sections": added_sections,
+        "removed_sections": removed_sections,
+    }
