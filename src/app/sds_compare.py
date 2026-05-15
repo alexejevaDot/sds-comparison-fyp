@@ -4,7 +4,7 @@ Helper functions for comparing two sets of SDS sections and identifying changes.
 
 import difflib
 import re
-
+from hazard_analysis import analyse_section2_changes
 
 def normalize_for_compare(text: str) -> str:
     text = text.replace("\r", "\n")
@@ -42,6 +42,11 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
     all_section_numbers = set(old_sections.keys()) | set(new_sections.keys())
     results = {}
 
+    section2_analysis = analyse_section2_changes(
+            old_sections.get("2", ""),
+            new_sections.get("2", "")
+        )
+
     for section_num in sorted(all_section_numbers):
         old_text = old_sections.get(section_num, "")
         new_text = new_sections.get(section_num, "")
@@ -54,6 +59,7 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
 
         changed = old_normalized != new_normalized
 
+
         results[section_num] = {
             "old_present": old_present,
             "new_present": new_present,
@@ -63,9 +69,14 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
             "old_preview": make_preview(old_text),
             "new_preview": make_preview(new_text),
             "change_summary": make_change_summary(old_text, new_text) if changed else [],
+        
         }
 
-    return results
+    return {
+        "sections": results,
+        "section2_analysis": section2_analysis
+    }
+
 
 
 def summarize_changes(comparison_results: dict) -> dict:
