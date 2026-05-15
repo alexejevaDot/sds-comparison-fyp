@@ -43,6 +43,45 @@
             margin: 10px 0 0 0;
         }
 
+        .section2-panel {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .section2-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .section2-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .section2-box h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .code-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .code-list li {
+            margin-bottom: 6px;
+            font-family: Consolas, monospace;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -153,6 +192,105 @@
     <h2>Detected Sections</h2>
     <p><strong>Old SDS sections found:</strong> {{ old_sections_found }}</p>
     <p><strong>New SDS sections found:</strong> {{ new_sections_found }}</p>
+
+    <h2>Section 2 Hazard Analysis</h2>
+
+    {% if section_2_analysis %}
+        <div class="section2-panel">
+            <p>
+                <strong>Section 2 changed:</strong>
+                {% if section_2_analysis["section2_changed"] %}
+                    <span class="changed">Changed</span>
+                {% else %}
+                    <span class="unchanged">Unchanged</span>
+                {% endif %}
+            </p>
+
+            <div class="section2-grid">
+                <div class="section2-box">
+                    <h3>Signal Words</h3>
+                    <p><strong>Old:</strong> {{ section_2_analysis["old"]["signal_words"] | join(', ') if section_2_analysis["old"]["signal_words"] else 'None detected' }}</p>
+                    <p><strong>New:</strong> {{ section_2_analysis["new"]["signal_words"] | join(', ') if section_2_analysis["new"]["signal_words"] else 'None detected' }}</p>
+                </div>
+
+                <div class="section2-box">
+                    <h3>H-code Changes</h3>
+
+                    <p><strong>Added:</strong></p>
+                    <ul class="code-list">
+                        {% if section_2_analysis["h_codes"]["added"] %}
+                            {% for code in section_2_analysis["h_codes"]["added"] %}
+                                <li>{{ code }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>None</li>
+                        {% endif %}
+                    </ul>
+
+                    <p><strong>Removed:</strong></p>
+                    <ul class="code-list">
+                        {% if section_2_analysis["h_codes"]["removed"] %}
+                            {% for code in section_2_analysis["h_codes"]["removed"] %}
+                                <li>{{ code }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>None</li>
+                        {% endif %}
+                    </ul>
+
+                    <p><strong>Unchanged:</strong></p>
+                    <ul class="code-list">
+                        {% if section_2_analysis["h_codes"]["unchanged"] %}
+                            {% for code in section_2_analysis["h_codes"]["unchanged"] %}
+                                <li>{{ code }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>None</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="section2-box">
+                    <h3>P-code Changes</h3>
+
+                    <p><strong>Added:</strong></p>
+                    <ul class="code-list">
+                        {% if section_2_analysis["p_codes"]["added"] %}
+                            {% for code in section_2_analysis["p_codes"]["added"] %}
+                                <li>{{ code }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>None</li>
+                        {% endif %}
+                    </ul>
+
+                    <p><strong>Removed:</strong></p>
+                    <ul class="code-list">
+                        {% if section_2_analysis["p_codes"]["removed"] %}
+                            {% for code in section_2_analysis["p_codes"]["removed"] %}
+                                <li>{{ code }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>None</li>
+                        {% endif %}
+                    </ul>
+
+                    <p><strong>Unchanged:</strong></p>
+                    <ul class="code-list">
+                        {% if section_2_analysis["p_codes"]["unchanged"] %}
+                            {% for code in section_2_analysis["p_codes"]["unchanged"] %}
+                                <li>{{ code }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>None</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>No Section 2 hazard analysis available.</p>
+    {% endif %}
 
     <h2>Section Comparison Table</h2>
     <table>
