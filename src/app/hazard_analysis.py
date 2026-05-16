@@ -1,17 +1,15 @@
 import re
+from chemical_reference_repository import ChemicalReferenceRepository
 
 
 SIGNAL_WORD_PATTERN = re.compile(r'\b(Danger|Warning)\b', re.IGNORECASE)
-H_CODE_PATTERN = re.compile(r'\bH\d{3}[A-Z]?\b', re.IGNORECASE)
-P_CODE_PATTERN = re.compile(r'\bP\d{3}(?:\+\w+)?\b', re.IGNORECASE)
+H_CODE_PATTERN = re.compile(r'H\d{3}[A-Z]?(?=\b|;|,|\s)', re.IGNORECASE)
+P_CODE_PATTERN = re.compile(r'P\d{3}(?:\+\w+)?(?=\b|;|,|\s)', re.IGNORECASE)
+
+repo = ChemicalReferenceRepository()
 
 
 def extract_section2_hazards(section_text: str) -> dict:
-    """
-    Extract hazard-related items from SDS Section 2 text.
-
-    Returns detected signal words, H-codes, and P-codes.
-    """
     if not section_text:
         return {
             "signal_words": [],
@@ -42,9 +40,6 @@ def extract_section2_hazards(section_text: str) -> dict:
 
 
 def compare_lists(old_list, new_list) -> dict:
-    """
-    Compare two lists and return added, removed, and unchanged items.
-    """
     old_set = set(old_list)
     new_set = set(new_list)
 
@@ -55,10 +50,15 @@ def compare_lists(old_list, new_list) -> dict:
     }
 
 
+def build_guidance_block(code_diff: dict) -> dict:
+    return {
+        "added": repo.get_hazard_codes(code_diff["added"]),
+        "removed": repo.get_hazard_codes(code_diff["removed"]),
+        "unchanged": repo.get_hazard_codes(code_diff["unchanged"])
+    }
+
+
 def analyse_section2_changes(old_text: str, new_text: str) -> dict:
-    """
-    Analyse changes between old and new SDS Section 2 text.
-    """
     old_data = extract_section2_hazards(old_text)
     new_data = extract_section2_hazards(new_text)
 
@@ -75,11 +75,19 @@ def analyse_section2_changes(old_text: str, new_text: str) -> dict:
         p_code_diff["removed"]
     ])
 
+    # Debug prints (left intentionally; remove or guard with logging if not needed)
+    print("OLD SECTION 2 TEXT PREVIEW:", old_text[:500])
+    print("NEW SECTION 2 TEXT PREVIEW:", new_text[:500])
+    print("OLD H CODES:", old_data["h_codes"])
+    print("NEW H CODES:", new_data["h_codes"])
+    print("H CODE DIFF:", h_code_diff)
+
     return {
         "old": old_data,
         "new": new_data,
         "signal_words": signal_word_diff,
         "h_codes": h_code_diff,
         "p_codes": p_code_diff,
+        "h_code_guidance": build_guidance_block(h_code_diff),
         "section2_changed": section2_changed
     }

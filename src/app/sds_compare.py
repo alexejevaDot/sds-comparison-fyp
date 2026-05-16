@@ -6,11 +6,20 @@ import difflib
 import re
 from hazard_analysis import analyse_section2_changes
 
+
 def normalize_for_compare(text: str) -> str:
     text = text.replace("\r", "\n")
     text = text.lower()
+
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{2,}", "\n", text)
+
+    text = re.sub(r"\bversion\s*[:.]?\s*[\w.\-\/]+\b", " ", text)
+    text = re.sub(r"\brevision\s*[:.]?\s*[\w.\-\/]+\b", " ", text)
+    text = re.sub(r"\bdate\s+of\s+issue\s*[:.]?\s*[\w.\-\/, ]+\b", " ", text)
+    text = re.sub(r"\bprint\s+date\s*[:.]?\s*[\w.\-\/, ]+\b", " ", text)
+    text = re.sub(r"\bissue\s+date\s*[:.]?\s*[\w.\-\/, ]+\b", " ", text)
+
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
@@ -42,12 +51,15 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
     all_section_numbers = set(old_sections.keys()) | set(new_sections.keys())
     results = {}
 
-    section2_analysis = analyse_section2_changes(
-            old_sections.get("2", ""),
-            new_sections.get("2", "")
-        )
+    section2_old_text = old_sections.get("2", old_sections.get(2, ""))
+    section2_new_text = new_sections.get("2", new_sections.get(2, ""))
 
-    for section_num in sorted(all_section_numbers):
+    section2_analysis = analyse_section2_changes(
+        section2_old_text,
+        section2_new_text
+    )
+
+    for section_num in sorted(all_section_numbers, key=lambda x: int(x) if str(x).isdigit() else str(x)):
         old_text = old_sections.get(section_num, "")
         new_text = new_sections.get(section_num, "")
 
@@ -59,6 +71,8 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
 
         changed = old_normalized != new_normalized
 
+        if str(section_num) == "2":
+            changed = section2_analysis["section2_changed"]
 
         results[section_num] = {
             "old_present": old_present,
@@ -69,15 +83,12 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
             "old_preview": make_preview(old_text),
             "new_preview": make_preview(new_text),
             "change_summary": make_change_summary(old_text, new_text) if changed else [],
-        
         }
 
     return {
         "sections": results,
         "section2_analysis": section2_analysis
     }
-
-
 
 def summarize_changes(comparison_results: dict) -> dict:
     total_sections = len(comparison_results)

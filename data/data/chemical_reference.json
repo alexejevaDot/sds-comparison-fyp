@@ -1,0 +1,158 @@
+{
+  "hazard_codes": [
+    {
+      "code": "H220",
+      "description": "Extremely flammable gas",
+      "meaning": "Indicates a very high fire risk if the gas is released and ignited.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H222",
+      "description": "Extremely flammable aerosol",
+      "meaning": "Indicates that the aerosol product can ignite very easily.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H223",
+      "description": "Flammable aerosol",
+      "meaning": "Indicates that the aerosol may catch fire under ignition conditions.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H225",
+      "description": "Highly flammable liquid and vapour",
+      "meaning": "Indicates a significant fire risk from the liquid and its vapour.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H226",
+      "description": "Flammable liquid and vapour",
+      "meaning": "Indicates that the liquid and vapour can ignite if exposed to a heat or ignition source.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H229",
+      "description": "Pressurised container: may burst if heated",
+      "meaning": "Indicates a pressure-related hazard if the container is exposed to heat.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H280",
+      "description": "Contains gas under pressure; may explode if heated",
+      "meaning": "Indicates a risk from stored gas pressure, especially under high temperature conditions.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H302",
+      "description": "Harmful if swallowed",
+      "meaning": "Indicates an acute oral toxicity hazard.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H304",
+      "description": "May be fatal if swallowed and enters airways",
+      "meaning": "Indicates an aspiration hazard with potentially serious consequences.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H312",
+      "description": "Harmful in contact with skin",
+      "meaning": "Indicates acute dermal toxicity risk.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H315",
+      "description": "Causes skin irritation",
+      "meaning": "Indicates that skin contact may cause irritation or inflammation.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H317",
+      "description": "May cause an allergic skin reaction",
+      "meaning": "Indicates potential skin sensitisation.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H319",
+      "description": "Causes serious eye irritation",
+      "meaning": "Indicates that eye contact may lead to significant irritation.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H332",
+      "description": "Harmful if inhaled",
+      "meaning": "Indicates acute inhalation toxicity risk.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H336",
+      "description": "May cause drowsiness or dizziness",
+      "meaning": "Indicates narcotic effects after inhalation or exposure.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H400",
+      "description": "Very toxic to aquatic life",
+      "meaning": "Indicates severe short-term environmental hazard to aquatic organisms.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    },
+    {
+      "code": "H411",
+      "description": "Toxic to aquatic life with long lasting effects",
+      "meaning": "Indicates long-term environmental hazard to aquatic systems.",
+      "guidance_link": "https://environment.ec.europa.eu/topics/chemicals/classification-labelling-and-packaging-chemicals_en"
+    }
+  ],
+  "substances": [
+    {
+      "name": "Ethanol",
+      "cas_number": "64-17-5",
+      "example_h_codes": ["H225", "H319"]
+    },
+    {
+      "name": "Propan-2-ol",
+      "cas_number": "67-63-0",
+      "example_h_codes": ["H225", "H319", "H336"]
+    },
+    {
+      "name": "Acetone",
+      "cas_number": "67-64-1",
+      "example_h_codes": ["H225", "H319", "H336"]
+    },
+    {
+      "name": "Methanol",
+      "cas_number": "67-56-1",
+      "example_h_codes": ["H225", "H302", "H332"]
+    },
+    {
+      "name": "n-Hexane",
+      "cas_number": "110-54-3",
+      "example_h_codes": ["H225", "H315", "H336", "H411"]
+    },
+    {
+      "name": "Toluene",
+      "cas_number": "108-88-3",
+      "example_h_codes": ["H225", "H315", "H336", "H304"]
+    },
+    {
+      "name": "Xylene",
+      "cas_number": "1330-20-7",
+      "example_h_codes": ["H226", "H312", "H315", "H332"]
+    },
+    {
+      "name": "Butane",
+      "cas_number": "106-97-8",
+      "example_h_codes": ["H220", "H280"]
+    },
+    {
+      "name": "Propane",
+      "cas_number": "74-98-6",
+      "example_h_codes": ["H220", "H280"]
+    },
+    {
+      "name": "Carbon dioxide",
+      "cas_number": "124-38-9",
+      "example_h_codes": ["H280"]
+    }
+  ]
+}
