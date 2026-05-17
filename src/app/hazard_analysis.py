@@ -75,12 +75,6 @@ def analyse_section2_changes(old_text: str, new_text: str) -> dict:
         p_code_diff["removed"]
     ])
 
-    # Debug prints (left intentionally; remove or guard with logging if not needed)
-    print("OLD SECTION 2 TEXT PREVIEW:", old_text[:500])
-    print("NEW SECTION 2 TEXT PREVIEW:", new_text[:500])
-    print("OLD H CODES:", old_data["h_codes"])
-    print("NEW H CODES:", new_data["h_codes"])
-    print("H CODE DIFF:", h_code_diff)
 
     return {
         "old": old_data,

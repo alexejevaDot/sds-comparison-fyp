@@ -10,21 +10,24 @@ class ChemicalReferenceRepository:
 
     def __init__(self, json_path=None):
         if json_path is None:
-            self.json_path = Path(__file__).resolve().parents[2] / "data" / "chemical_reference.json"
+            self.json_path = Path(r"C:\Users\Watson\OneDrive\Desktop\DMU_Work\FYP_sds_comparison-\data\data\chemical_reference.json")
         else:
             self.json_path = Path(json_path)
-
         self.data = self._load_data()
+    
+
         self.hazard_code_index = {
             item["code"].upper(): item
             for item in self.data.get("hazard_codes", [])
             if "code" in item
         }
+
         self.substance_name_index = {
             item["name"].strip().lower(): item
             for item in self.data.get("substances", [])
             if "name" in item
         }
+
         self.cas_index = {
             item["cas_number"].strip(): item
             for item in self.data.get("substances", [])

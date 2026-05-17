@@ -73,41 +73,42 @@
         }
 
         .guidance-panel {
-             background: #ffffff;
-             border: 1px solid #d1d5db;
-             border-radius: 8px;
-             padding: 16px;
-             margin-top: 20px;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .guidance-panel h3 {
-             margin-top: 0;
-             margin-bottom: 12px;
-             font-size: 18px;
-        }  
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
 
         .guidance-card {
-             background: #f9fafb;
-             border: 1px solid #e5e7eb;
-             border-radius: 8px;
-             padding: 12px;
-             margin-bottom: 12px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
         }
 
         .guidance-card p {
-             margin: 6px 0;
+            margin: 6px 0;
         }
 
         .guidance-link {
-             display: inline-block;
-             margin-top: 6px;
-             color: #2563eb;
-             text-decoration: none;
-             font-weight: bold;
+            display: inline-block;
+            margin-top: 6px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .guidance-link:hover {
-             text-decoration: underline;
+            text-decoration: underline;
         }
 
         .code-list {
@@ -237,46 +238,44 @@
         <div class="section2-panel">
             <p>
                 <strong>Section 2 changed:</strong>
+                
                 {% if section_2_analysis["section2_changed"] %}
                     <span class="changed">Changed</span>
                 {% else %}
                     <span class="unchanged">Unchanged</span>
                 {% endif %}
-    {% set added_guidance = section_2_analysis["h_code_guidance"]["added"] %}
-{% set removed_guidance = section_2_analysis["h_code_guidance"]["removed"] %}
-
-{% if added_guidance or removed_guidance %}
-    <div class="guidance-panel">
-        <h3>Reference Guidance for H-code Changes</h3>
-
-        {% if added_guidance %}
-            <p><strong>Added H-codes:</strong></p>
-            {% for item in added_guidance %}
-                <div class="guidance-card">
-                    <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
-                    <p>{{ item.meaning }}</p>
-                    <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">
-                        Open guidance
-                    </a>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if removed_guidance %}
-            <p><strong>Removed H-codes:</strong></p>
-            {% for item in removed_guidance %}
-                <div class="guidance-card">
-                    <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
-                    <p>{{ item.meaning }}</p>
-                    <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">
-                        Open guidance
-                    </a>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endif %}
             </p>
+
+            {% set added_guidance = section_2_analysis["h_code_guidance"]["added"] %}
+            {% set removed_guidance = section_2_analysis["h_code_guidance"]["removed"] %}
+
+            {% if added_guidance or removed_guidance %}
+                <div class="guidance-panel">
+                    <h3>Reference Guidance for H-code Changes</h3>
+
+                    {% if added_guidance %}
+                        <p><strong>Added H-codes:</strong></p>
+                        {% for item in added_guidance %}
+                            <div class="guidance-card">
+                                <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
+                                <p>{{ item.meaning }}</p>
+                                <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">Open guidance</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if removed_guidance %}
+                        <p><strong>Removed H-codes:</strong></p>
+                        {% for item in removed_guidance %}
+                            <div class="guidance-card">
+                                <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
+                                <p>{{ item.meaning }}</p>
+                                <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">Open guidance</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
 
             <div class="section2-grid">
                 <div class="section2-box">
