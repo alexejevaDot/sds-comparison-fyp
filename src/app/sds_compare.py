@@ -82,6 +82,8 @@ def compare_sections(old_sections: dict, new_sections: dict) -> dict:
             "changed": changed,
             "old_preview": make_preview(old_text),
             "new_preview": make_preview(new_text),
+            "old_full_text": old_text,
+            "new_full_text": new_text,
             "change_summary": make_change_summary(old_text, new_text) if changed else [],
         }
 

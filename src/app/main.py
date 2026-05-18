@@ -77,8 +77,10 @@ def compare():
             "changed": result["changed"],
             "old_preview": result["old_preview"],
             "new_preview": result["new_preview"],
+            "old_full_text": result.get("old_full_text", result["old_preview"]),
+            "new_full_text": result.get("new_full_text", result["new_preview"]),
             "change_summary": result["change_summary"],
-        })
+    })
 
     return render_template(
         "results.html",

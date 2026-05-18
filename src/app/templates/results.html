@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,9 @@
             color: #222;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             color: #1f2937;
         }
 
@@ -124,53 +127,144 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            margin-bottom: 40px;
+            margin-top: 16px;
+            margin-bottom: 28px;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
         }
 
-        th, td {
-            border: 1px solid #d1d5db;
-            padding: 12px;
-            text-align: center;
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: middle;
         }
 
         th {
-            background-color: #e5e7eb;
-            font-weight: bold;
+            background: #f8fafc;
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+        }
+
+        td {
+            font-size: 15px;
+            color: #374151;
+        }
+
+        tr:hover {
+            background: #f9fbfd;
+        }
+
+        .changed,
+        .unchanged {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0.2px;
         }
 
         .changed {
-            color: #b00020;
-            font-weight: bold;
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
         }
 
         .unchanged {
-            color: #0a7a33;
-            font-weight: bold;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        td a {
+            display: inline-block;
+            color: #0f5ea8;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline;
         }
 
         .detail-card {
-            background: white;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+            border: 1px solid #dbe3ea;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
         }
 
-        .detail-card h3 {
-            margin-top: 0;
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 14px;
+            margin-bottom: 18px;
+            align-items: stretch;
+        }
+
+        .preview-panel {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .preview-panel p {
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #1f2937;
         }
 
         .preview-box {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 8px;
-            margin-bottom: 15px;
+            background: #f8fafc;
+            border: 1px solid #dbe3ea;
+            border-radius: 10px;
+            padding: 14px;
+            min-height: 260px;
+            max-height: 260px;
+            overflow-y: auto;
+            overflow-x: hidden;
             white-space: pre-wrap;
-            word-wrap: break-word;
+            word-break: break-word;
+            line-height: 1.6;
+            font-size: 15px;
+            color: #374151;
+        }
+
+        .diff-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .diff-list li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-box {
+                max-height: 220px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
         }
 
         ul.diff-list {
@@ -197,6 +291,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <h1>SDS Comparison Results</h1>
@@ -216,217 +311,307 @@
             <h3>Sections Unchanged</h3>
             <p>{{ summary.sections_unchanged }}</p>
         </div>
-
-        <div class="summary-card">
-            <h3>Old Text Length</h3>
-            <p>{{ old_text_length }}</p>
-        </div>
-
-        <div class="summary-card">
-            <h3>New Text Length</h3>
-            <p>{{ new_text_length }}</p>
-        </div>
     </div>
 
-    <h2>Detected Sections</h2>
-    <p><strong>Old SDS sections found:</strong> {{ old_sections_found }}</p>
-    <p><strong>New SDS sections found:</strong> {{ new_sections_found }}</p>
+    <h2>Section Detection</h2>
+    <div class="info-card">
+        {% if old_sections_found|length == 16 and new_sections_found|length == 16 %}
+        <p class="unchanged"><strong> All 16 standard SDS sections were detected in both files.</p>
+        {% else %}
+        <p><strong>Old SDS:</strong> {{ old_sections_found|length }} sections detected</p>
+        <p><strong>New SDS:</strong> {{ new_sections_found|length }} sections detected</p>
+        <p class="changed"><strong>Attention:</strong> some sections may be missing or may not have been recognised
+            correctly.</p>
+        {% endif %}
+    </div>
 
     <h2>Section 2 Hazard Analysis</h2>
 
     {% if section_2_analysis %}
-        <div class="section2-panel">
-            <p>
-                <strong>Section 2 changed:</strong>
-                
-                {% if section_2_analysis["section2_changed"] %}
-                    <span class="changed">Changed</span>
-                {% else %}
-                    <span class="unchanged">Unchanged</span>
-                {% endif %}
-            </p>
+    <div class="section2-panel">
+        <p>
+            <strong>Section 2 changed:</strong>
+            {% if section_2_analysis["section2_changed"] %}
+            <span class="changed">Changed</span>
+            {% else %}
+            <span class="unchanged">Unchanged</span>
+            {% endif %}
+        </p>
 
-            {% set added_guidance = section_2_analysis["h_code_guidance"]["added"] %}
-            {% set removed_guidance = section_2_analysis["h_code_guidance"]["removed"] %}
+        {% set added_guidance = section_2_analysis["h_code_guidance"]["added"] %}
+        {% set removed_guidance = section_2_analysis["h_code_guidance"]["removed"] %}
 
-            {% if added_guidance or removed_guidance %}
-                <div class="guidance-panel">
-                    <h3>Reference Guidance for H-code Changes</h3>
+        {% if added_guidance or removed_guidance %}
+        <div class="guidance-panel">
+            <h3>Reference Guidance for H-code Changes</h3>
 
-                    {% if added_guidance %}
-                        <p><strong>Added H-codes:</strong></p>
-                        {% for item in added_guidance %}
-                            <div class="guidance-card">
-                                <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
-                                <p>{{ item.meaning }}</p>
-                                <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">Open guidance</a>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
-                    {% if removed_guidance %}
-                        <p><strong>Removed H-codes:</strong></p>
-                        {% for item in removed_guidance %}
-                            <div class="guidance-card">
-                                <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
-                                <p>{{ item.meaning }}</p>
-                                <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">Open guidance</a>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
+            {% if added_guidance %}
+            <p><strong>Added H-codes:</strong></p>
+            {% for item in added_guidance %}
+            <div class="guidance-card">
+                <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
+                <p>{{ item.meaning }}</p>
+                <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">Open
+                    guidance</a>
+            </div>
+            {% endfor %}
             {% endif %}
 
-            <div class="section2-grid">
-                <div class="section2-box">
-                    <h3>Signal Words</h3>
-                    <p><strong>Old:</strong> {{ section_2_analysis["old"]["signal_words"] | join(', ') if section_2_analysis["old"]["signal_words"] else 'None detected' }}</p>
-                    <p><strong>New:</strong> {{ section_2_analysis["new"]["signal_words"] | join(', ') if section_2_analysis["new"]["signal_words"] else 'None detected' }}</p>
-                </div>
+            {% if removed_guidance %}
+            <p><strong>Removed H-codes:</strong></p>
+            {% for item in removed_guidance %}
+            <div class="guidance-card">
+                <p><strong>{{ item.code }}</strong> - {{ item.description }}</p>
+                <p>{{ item.meaning }}</p>
+                <a href="{{ item.guidance_link }}" target="_blank" rel="noopener noreferrer" class="guidance-link">Open
+                    guidance</a>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
 
-                <div class="section2-box">
-                    <h3>H-code Changes</h3>
+        <div class="section2-grid">
+            <div class="section2-box">
+                <h3>Signal Words</h3>
+                <p><strong>Old:</strong> {{ section_2_analysis["old"]["signal_words"] | join(', ') if
+                    section_2_analysis["old"]["signal_words"] else 'None detected' }}</p>
+                <p><strong>New:</strong> {{ section_2_analysis["new"]["signal_words"] | join(', ') if
+                    section_2_analysis["new"]["signal_words"] else 'None detected' }}</p>
+            </div>
 
-                    <p><strong>Added:</strong></p>
-                    <ul class="code-list">
-                        {% if section_2_analysis["h_codes"]["added"] %}
-                            {% for code in section_2_analysis["h_codes"]["added"] %}
-                                <li>{{ code }}</li>
-                            {% endfor %}
-                        {% else %}
-                            <li>None</li>
-                        {% endif %}
-                    </ul>
+            <div class="section2-box">
+                <h3>H-code Changes</h3>
 
-                    <p><strong>Removed:</strong></p>
-                    <ul class="code-list">
-                        {% if section_2_analysis["h_codes"]["removed"] %}
-                            {% for code in section_2_analysis["h_codes"]["removed"] %}
-                                <li>{{ code }}</li>
-                            {% endfor %}
-                        {% else %}
-                            <li>None</li>
-                        {% endif %}
-                    </ul>
+                <p><strong>Added:</strong></p>
+                <ul class="code-list">
+                    {% if section_2_analysis["h_codes"]["added"] %}
+                    {% for code in section_2_analysis["h_codes"]["added"] %}
+                    <li>{{ code }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>None</li>
+                    {% endif %}
+                </ul>
 
-                    <p><strong>Unchanged:</strong></p>
-                    <ul class="code-list">
-                        {% if section_2_analysis["h_codes"]["unchanged"] %}
-                            {% for code in section_2_analysis["h_codes"]["unchanged"] %}
-                                <li>{{ code }}</li>
-                            {% endfor %}
-                        {% else %}
-                            <li>None</li>
-                        {% endif %}
-                    </ul>
-                </div>
+                <p><strong>Removed:</strong></p>
+                <ul class="code-list">
+                    {% if section_2_analysis["h_codes"]["removed"] %}
+                    {% for code in section_2_analysis["h_codes"]["removed"] %}
+                    <li>{{ code }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>None</li>
+                    {% endif %}
+                </ul>
 
-                <div class="section2-box">
-                    <h3>P-code Changes</h3>
+                <p><strong>Unchanged:</strong></p>
+                <ul class="code-list">
+                    {% if section_2_analysis["h_codes"]["unchanged"] %}
+                    {% for code in section_2_analysis["h_codes"]["unchanged"] %}
+                    <li>{{ code }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>None</li>
+                    {% endif %}
+                </ul>
+            </div>
 
-                    <p><strong>Added:</strong></p>
-                    <ul class="code-list">
-                        {% if section_2_analysis["p_codes"]["added"] %}
-                            {% for code in section_2_analysis["p_codes"]["added"] %}
-                                <li>{{ code }}</li>
-                            {% endfor %}
-                        {% else %}
-                            <li>None</li>
-                        {% endif %}
-                    </ul>
+            <div class="section2-box">
+                <h3>P-code Changes</h3>
 
-                    <p><strong>Removed:</strong></p>
-                    <ul class="code-list">
-                        {% if section_2_analysis["p_codes"]["removed"] %}
-                            {% for code in section_2_analysis["p_codes"]["removed"] %}
-                                <li>{{ code }}</li>
-                            {% endfor %}
-                        {% else %}
-                            <li>None</li>
-                        {% endif %}
-                    </ul>
+                <p><strong>Added:</strong></p>
+                <ul class="code-list">
+                    {% if section_2_analysis["p_codes"]["added"] %}
+                    {% for code in section_2_analysis["p_codes"]["added"] %}
+                    <li>{{ code }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>None</li>
+                    {% endif %}
+                </ul>
 
-                    <p><strong>Unchanged:</strong></p>
-                    <ul class="code-list">
-                        {% if section_2_analysis["p_codes"]["unchanged"] %}
-                            {% for code in section_2_analysis["p_codes"]["unchanged"] %}
-                                <li>{{ code }}</li>
-                            {% endfor %}
-                        {% else %}
-                            <li>None</li>
-                        {% endif %}
-                    </ul>
-                </div>
+                <p><strong>Removed:</strong></p>
+                <ul class="code-list">
+                    {% if section_2_analysis["p_codes"]["removed"] %}
+                    {% for code in section_2_analysis["p_codes"]["removed"] %}
+                    <li>{{ code }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>None</li>
+                    {% endif %}
+                </ul>
+
+                <p><strong>Unchanged:</strong></p>
+                <ul class="code-list">
+                    {% if section_2_analysis["p_codes"]["unchanged"] %}
+                    {% for code in section_2_analysis["p_codes"]["unchanged"] %}
+                    <li>{{ code }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>None</li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
+    </div>
     {% else %}
-        <p>No Section 2 hazard analysis available.</p>
+    <p>No Section 2 hazard analysis available.</p>
     {% endif %}
 
-    <h2>Section Comparison Table</h2>
+    <h2>Sections to Review</h2>
+    <div class="helper-note">
+        Use this table to jump to sections that need attention.
+    </div>
+
     <table>
         <thead>
             <tr>
-                <th>Section</th>
-                <th>Old Present</th>
-                <th>New Present</th>
-                <th>Old Length</th>
-                <th>New Length</th>
-                <th>Status</th>
+                <th>Section name</th>
+                <th>Result</th>
+                <th>Suggested action</th>
+                <th>Open</th>
             </tr>
         </thead>
         <tbody>
             {% for row in section_rows %}
             <tr>
-                <td>{{ row.section_num }}</td>
-                <td>{{ row.old_present }}</td>
-                <td>{{ row.new_present }}</td>
-                <td>{{ row.old_length }}</td>
-                <td>{{ row.new_length }}</td>
+                <td>
+                    {% if row.section_num == 1 %}
+                    1 – Identification
+                    {% elif row.section_num == 2 %}
+                    2 – Hazards identification
+                    {% elif row.section_num == 3 %}
+                    3 – Composition / ingredients
+                    {% elif row.section_num == 4 %}
+                    4 – First aid measures
+                    {% elif row.section_num == 5 %}
+                    5 – Firefighting measures
+                    {% elif row.section_num == 6 %}
+                    6 – Accidental release measures
+                    {% elif row.section_num == 7 %}
+                    7 – Handling and storage
+                    {% elif row.section_num == 8 %}
+                    8 – Exposure controls / personal protection
+                    {% elif row.section_num == 9 %}
+                    9 – Physical and chemical properties
+                    {% elif row.section_num == 10 %}
+                    10 – Stability and reactivity
+                    {% elif row.section_num == 11 %}
+                    11 – Toxicological information
+                    {% elif row.section_num == 12 %}
+                    12 – Ecological information
+                    {% elif row.section_num == 13 %}
+                    13 – Disposal considerations
+                    {% elif row.section_num == 14 %}
+                    14 – Transport information
+                    {% elif row.section_num == 15 %}
+                    15 – Regulatory information
+                    {% elif row.section_num == 16 %}
+                    16 – Other information
+                    {% else %}
+                    Section {{ row.section_num }}
+                    {% endif %}
+                </td>
                 <td>
                     {% if row.changed %}
-                        <span class="changed">Changed</span>
+                    <span class="changed">Updated</span>
                     {% else %}
-                        <span class="unchanged">Unchanged</span>
+                    <span class="unchanged">No changes</span>
                     {% endif %}
+                </td>
+                <td>
+                    {% if row.changed %}
+                    {% if row.section_num == 1 %}
+                    Check product and supplier details
+                    {% elif row.section_num == 2 %}
+                    Review hazard and warning changes
+                    {% elif row.section_num == 3 %}
+                    Check ingredient information
+                    {% elif row.section_num == 4 %}
+                    Check first aid instructions
+                    {% elif row.section_num == 5 %}
+                    Check fire response advice
+                    {% elif row.section_num == 6 %}
+                    Check spill and leak guidance
+                    {% elif row.section_num == 7 %}
+                    Check handling and storage advice
+                    {% elif row.section_num == 8 %}
+                    Check PPE and exposure limits
+                    {% elif row.section_num == 9 %}
+                    Check physical property updates
+                    {% elif row.section_num == 10 %}
+                    Check stability and reaction risks
+                    {% elif row.section_num == 11 %}
+                    Check health hazard information
+                    {% elif row.section_num == 12 %}
+                    Check environmental information
+                    {% elif row.section_num == 13 %}
+                    Check disposal advice
+                    {% elif row.section_num == 14 %}
+                    Check transport requirements
+                    {% elif row.section_num == 15 %}
+                    Check regulatory information
+                    {% elif row.section_num == 16 %}
+                    Review general notes and updates
+                    {% else %}
+                    Review this section
+                    {% endif %}
+                    {% else %}
+                    No action needed
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="#section-{{ row.section_num }}">Open section</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2>Changed Section Details</h2>
+    <h2>Detailed Section Comparison</h2>
 
     {% set changed_sections = section_rows | selectattr("changed") | list %}
 
     {% if changed_sections %}
-        {% for row in changed_sections %}
-            <div class="detail-card">
-                <h3>Section {{ row.section_num }}</h3>
+    {% for row in changed_sections %}
+    <div class="detail-card" id="section-{{ row.section_num }}">
+        <h3>Section {{ row.section_num }}</h3>
 
-                <p><strong>Old Preview:</strong></p>
-                <div class="preview-box">{{ row.old_preview }}</div>
-
-                <p><strong>New Preview:</strong></p>
-                <div class="preview-box">{{ row.new_preview }}</div>
-
-                {% if row.change_summary %}
-                    <p><strong>Text-level differences in Section {{ row.section_num }}:</strong></p>
-                    <ul class="diff-list">
-                        {% for line in row.change_summary %}
-                            <li>{{ line }}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No detailed differences available.</p>
-                {% endif %}
+        <div class="compare-grid">
+            <div class="preview-panel">
+                <p><strong>Older SDS version:</strong></p>
+                <div class="preview-box">
+                    {{ row.old_full_text if row.old_full_text else row.old_preview }}
+                </div>
             </div>
-        {% endfor %}
+
+            <div class="preview-panel">
+                <p><strong>Newer SDS version:</strong></p>
+                <div class="preview-box">
+                    {{ row.new_full_text if row.new_full_text else row.new_preview }}
+                </div>
+            </div>
+        </div>
+
+        {% if row.change_summary %}
+        <p><strong>Main text changes found in Section {{ row.section_num }}:</strong></p>
+        <ul class="diff-list">
+            {% for line in row.change_summary %}
+            <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No detailed differences available.</p>
+        {% endif %}
+    </div>
+    {% endfor %}
     {% else %}
-        <p>No changed sections detected.</p>
+    <p>No changed sections detected.</p>
     {% endif %}
 
     <a href="/" class="back-link">Compare Another Pair</a>
 
 </body>
+
 </html>
